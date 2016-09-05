@@ -460,7 +460,7 @@ module Google
         end
 
         def user_defined_function_resources code
-          [ { "inlineCode" => code } ]
+          [ { "inlineCode" => (code || '') } ]
         end
 
         def priority_value str
