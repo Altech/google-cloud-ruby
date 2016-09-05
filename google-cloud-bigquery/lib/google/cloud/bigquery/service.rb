@@ -460,7 +460,9 @@ module Google
         end
 
         def user_defined_function_resources code
-          [ { "inlineCode" => (code || '') } ]
+          [API::UserDefinedFunctionResource.new(
+            inline_code: code
+          )] if code
         end
 
         def priority_value str
