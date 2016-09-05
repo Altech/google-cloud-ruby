@@ -155,7 +155,7 @@ module Google
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      dataset: dataset }
+                      dataset: dataset, inline_udf: inline_udf }
           gapi = service.query_job query, options
           Job.from_gapi gapi, service
         end
