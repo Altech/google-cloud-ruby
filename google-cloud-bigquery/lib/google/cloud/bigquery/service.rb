@@ -381,7 +381,8 @@ module Google
                 write_disposition: write_disposition(options[:write]),
                 allow_large_results: options[:large_results],
                 flatten_results: options[:flatten],
-                default_dataset: default_dataset
+                default_dataset: default_dataset,
+                user_defined_function_resources: user_defined_function_resources(options[:inline_udf]),
               )
             )
           )
@@ -456,6 +457,10 @@ module Google
             "write_empty" => "WRITE_EMPTY",
             "writeempty" => "WRITE_EMPTY",
             "empty" => "WRITE_EMPTY" }[str.to_s.downcase]
+        end
+
+        def user_defined_function_resources code
+          [ { "inlineCode" => code } ]
         end
 
         def priority_value str

@@ -127,6 +127,8 @@ module Google
         #   parameter must be `true` if this is set to `false`.
         # @param [Dataset, String] dataset Specifies the default dataset to use
         #   for unqualified table names in the query.
+        # @param [String] inline_udf Specified an inline resource that contains
+        #   code for a user-defined function.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -148,7 +150,7 @@ module Google
         #
         def query_job query, priority: "INTERACTIVE", cache: true, table: nil,
                       create: nil, write: nil, large_results: nil, flatten: nil,
-                      dataset: nil
+                      dataset: nil, inline_udf: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
