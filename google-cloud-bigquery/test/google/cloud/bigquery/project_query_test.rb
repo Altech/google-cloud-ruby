@@ -153,4 +153,15 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     data.count.must_equal 3
     mock.verify
   end
+
+  it "queries the data with legacy_sql" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :query_job, query_data_gapi, [project, query_request]
+
+    data = bigquery.query query, cache: true
+    data.class.must_equal Google::Cloud::Bigquery::QueryData
+    data.count.must_equal 3
+    mock.verify
+  end
 end

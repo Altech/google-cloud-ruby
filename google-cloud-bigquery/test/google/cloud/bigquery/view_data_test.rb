@@ -18,6 +18,7 @@ describe Google::Cloud::Bigquery::View, :data, :mock_bigquery do
   let(:query_request) {
     qrg = query_request_gapi
     qrg.default_dataset = nil
+    qrg.use_legacy_sql = nil
     qrg.query = "SELECT * FROM [test-project:my_dataset.my_view]"
     qrg
   }

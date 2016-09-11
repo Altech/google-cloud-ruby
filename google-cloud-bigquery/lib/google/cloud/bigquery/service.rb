@@ -376,6 +376,7 @@ module Google
                 # tableDefinitions: { ... },
                 priority: priority_value(options[:priority]),
                 use_query_cache: options[:cache],
+                use_legacy_sql: options[:legacy_sql],
                 destination_table: dest_table,
                 create_disposition: create_disposition(options[:create]),
                 write_disposition: write_disposition(options[:write]),
@@ -396,7 +397,8 @@ module Google
             default_dataset: dataset_config,
             timeout_ms: options[:timeout],
             dry_run: options[:dryrun],
-            use_query_cache: options[:cache]
+            use_query_cache: options[:cache],
+            use_legacy_sql: options[:legacy_sql]
           )
         end
 

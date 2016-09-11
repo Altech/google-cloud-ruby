@@ -127,6 +127,9 @@ module Google
         #   parameter must be `true` if this is set to `false`.
         # @param [Dataset, String] dataset Specifies the default dataset to use
         #   for unqualified table names in the query.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   legacy SQL dialect for this query. The default value is `true`.
+        #   If set to `false`, the query will use BigQuery's standard SQL.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -148,12 +151,12 @@ module Google
         #
         def query_job query, priority: "INTERACTIVE", cache: true, table: nil,
                       create: nil, write: nil, large_results: nil, flatten: nil,
-                      dataset: nil
+                      dataset: nil, legacy_sql: true
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      dataset: dataset }
+                      dataset: dataset, legacy_sql: legacy_sql }
           gapi = service.query_job query, options
           Job.from_gapi gapi, service
         end
@@ -194,6 +197,9 @@ module Google
         # @param [String] project Specifies the default projectId to assume for
         #   any unqualified table names in the query. Only used if `dataset`
         #   option is set.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   legacy SQL dialect for this query. The default value is `true`.
+        #   If set to `false`, the query will use BigQuery's standard SQL.
         #
         # @return [Google::Cloud::Bigquery::QueryData]
         #
@@ -220,10 +226,11 @@ module Google
         #   end
         #
         def query query, max: nil, timeout: 10000, dryrun: nil, cache: true,
-                  dataset: nil, project: nil
+                  dataset: nil, project: nil, legacy_sql: true
           ensure_service!
           options = { max: max, timeout: timeout, dryrun: dryrun, cache: cache,
-                      dataset: dataset, project: project }
+                      dataset: dataset, project: project,
+                      legacy_sql: legacy_sql }
           gapi = service.query query, options
           QueryData.from_gapi gapi, service
         end
